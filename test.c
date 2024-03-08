@@ -2,11 +2,6 @@
 #include "spiderstep.h"
 
 int main(void) {
-  unsigned long grid_height = 10;
-  unsigned long grid_width = 10;
-  unsigned long source = 0;
-  unsigned long destination = 95;
-  long step;
   unsigned char grid[100] = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -19,6 +14,11 @@ int main(void) {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0
   };
+  unsigned long grid_height = 10;
+  unsigned long grid_width = 10;
+  unsigned long source = 0;
+  unsigned long destination = 95;
+  long step;
   unsigned char i = 0;
 
   grid[source] = 1;

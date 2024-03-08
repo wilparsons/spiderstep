@@ -11,18 +11,18 @@ long spiderstep(const unsigned long grid_width, const unsigned long grid_height,
   destination_x = destination - ((destination_x << 3) + (destination_x << 1));
 
   if (source != destination) {
-    if (source_y == destination_y) {
-      if (source_x < destination_x) {
-        step = -1;
+    if (source_x == destination_x) {
+      if (source_y < destination_y) {
+        step = grid_width;
       } else {
-        step = 1;
+        step = -grid_width;
       }
     } else {
-      if (source_x == destination_x) {
-        if (source_y < destination_y) {
-          step = grid_width;
+      if (source_y == destination_y) {
+        if (source_x < destination_x) {
+          step = 1;
         } else {
-          step = -grid_width;
+          step = -1;
         }
       } else {
         if (source_x < destination_x) {
