@@ -12,6 +12,15 @@ Read [this article](https://medium.com/@wilparsons/spiderstep-is-an-optimized-ca
 #include "spiderstep.h"
 
 int main(void) {
+  struct spiderstep_s _spiderstep = {
+    .grid_height = 10,
+    .grid_width = 10,
+    .source = 0,
+    .destination = 95,
+    .has_source_coordinates = false,
+    .has_destination_coordinates = false
+  };
+  struct spiderstep_s *spiderstep = &_spiderstep;
   unsigned char grid[100] = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -24,26 +33,29 @@ int main(void) {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0
   };
-  unsigned long grid_height = 10;
-  unsigned long grid_width = 10;
-  unsigned long source = 0;
-  unsigned long destination = 95;
   unsigned char i = 0;
 
-  grid[source] = 1;
+  grid[spiderstep->source] = 1;
 
-  while (source != destination) {
-    source += spiderstep(grid_width, grid_height, source, destination);
-    grid[source] = 3;
+  while (spiderstep->source != spiderstep->destination) {
+    spiderstep_calculate(spiderstep);
+
+    while (spiderstep->repetitions != 0) {
+      spiderstep->source += spiderstep->step;
+      grid[spiderstep->source] = 3;
+      spiderstep->repetitions--;
+    }
   }
 
-  grid[destination] = 2;
+  grid[spiderstep->destination] = 2;
 
   while (i != 100) {
-    printf("%u ", grid[i]);
+    printf("%u", grid[i]);
 
     if (((i + 1) % 10) == 0) {
       printf("\n");
+    } else {
+      printf(" ");
     }
 
     i++;
@@ -54,17 +66,9 @@ int main(void) {
 ```
 
 ## Reference
-#### `spiderstep()`
-This is the hashing function that accepts the 4 following arguments.
+#### `spiderstep_calculate()`
+This is the step calculation function that accepts the following argument.
 
-`grid_width` is the width of the rectangular grid.
+`spiderstep` is the pointer to the `struct` instance containing the grid navigation data.
 
-`grid_height` is the height of the rectangular grid.
-
-`source` is the starting position as an index in a grid array with `grid_width` * `grid_height` elements.
-
-`destination` is the ending position as an index in a grid array with `grid_width` * `grid_height` elements.
-
-The return value data type is `long`.
-
-It returns the 32-bit signed integer increment step to calculate the next position of `source`.
+The return value data type is `void`.
