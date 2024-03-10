@@ -5,13 +5,15 @@ long spiderstep(const unsigned long grid_width, const unsigned long grid_height,
   const unsigned long source_x = source - (grid_width * source_y);
   const unsigned long destination_y = destination / grid_height;
   const unsigned long destination_x = destination - (grid_width * destination_y);
-  long step = grid_width;
+  long step;
 
   if (source_x == destination_x) {
-    if (source_y > destination_y) {
-      step = -grid_width;
+    if (source_y < destination_y) {
+      step = grid_width;
     } else {
-      if (source_y == destination_y) {
+      if (source_y > destination_y) {
+        step = -grid_width;
+      } else {
         step = 0;
       }
     }
