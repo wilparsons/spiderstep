@@ -12,15 +12,8 @@ Read [this article](https://medium.com/@wilparsons/spiderstep-is-an-optimized-ca
 #include "spiderstep.h"
 
 int main(void) {
-  struct spiderstep_s _spiderstep = {
-    .grid_height = 10,
-    .grid_width = 10,
-    .source = 0,
-    .destination = 95,
-    .has_source_coordinates = false,
-    .has_destination_coordinates = false
-  };
-  struct spiderstep_s *spiderstep = &_spiderstep;
+  struct spiderstep_s _spiderstep;
+  struct spiderstep_s *spiderstep = spiderstep_initialize(10, 10, 0, 95, &_spiderstep);
   unsigned char grid[100] = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -66,6 +59,23 @@ int main(void) {
 ```
 
 ## Reference
+#### `spiderstep_initialize()`
+This is the initialization function that accepts the 5 following arguments.
+
+`grid_width` is the width of the rectangular grid.
+
+`grid_height` is the height of the rectangular grid.
+
+`source` is the starting position as an index in a grid array with `grid_width` * `grid_height` elements.
+
+`destination` is the ending position as an index in a grid array with `grid_width` * `grid_height` elements.
+
+`spiderstep` is the pointer to the uninitialized `struct` instance.
+
+The return value data type is `struct spiderstep_s`.
+
+It returns a pointer to a `struct` instance initialized with the parameter values.
+
 #### `spiderstep_calculate()`
 This is the step calculation function that accepts the following argument.
 

@@ -18,5 +18,6 @@ struct spiderstep_s {
   bool has_destination_coordinates;
 };
 
+struct spiderstep_s *spiderstep_initialize(const unsigned long grid_width, const unsigned long grid_height, const unsigned long source, const unsigned long destination, struct spiderstep_s *spiderstep);
 void spiderstep_calculate(struct spiderstep_s *spiderstep);
 #endif

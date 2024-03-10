@@ -1,6 +1,17 @@
 #include "spiderstep.h"
 #include <stdio.h>
 
+struct spiderstep_s *spiderstep_initialize(const unsigned long grid_width, const unsigned long grid_height, const unsigned long source, const unsigned long destination, struct spiderstep_s *spiderstep) {
+  spiderstep->grid_width = grid_width;
+  spiderstep->grid_height = grid_height;
+  spiderstep->source = source;
+  spiderstep->destination = destination;
+  spiderstep->step = 0;
+  spiderstep->has_source_coordinates = false;
+  spiderstep->has_destination_coordinates = false;
+  return spiderstep;
+}
+
 void spiderstep_calculate(struct spiderstep_s *spiderstep) {
   if (spiderstep->has_source_coordinates == false) {
     spiderstep->source_y = spiderstep->source / spiderstep->grid_height;
