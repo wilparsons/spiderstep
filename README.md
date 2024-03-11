@@ -4,7 +4,7 @@
 ## Description
 SpiderStep is a grid navigation step calculation algorithm.
 
-Read [this article](https://medium.com/@wilparsons/spiderstep-is-an-optimized-calculation-of-8-directional-navigation-steps-in-2-dimensional-grids-42c849287574) for an in-depth explanation.
+Read [this article](https://medium.com/@wilparsons/spiderstep-is-a-new-optimized-calculation-of-8-directional-navigation-steps-in-2-dimensional-grids-d90cf44d5b5c) for an in-depth explanation.
 
 ## Usage
 ``` c
