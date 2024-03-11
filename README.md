@@ -13,7 +13,7 @@ Read [this article](https://medium.com/@wilparsons/spiderstep-is-a-new-optimized
 
 int main(void) {
   struct spiderstep_s _spiderstep;
-  struct spiderstep_s *spiderstep = spiderstep_initialize(10, 10, 49, 0, &_spiderstep);
+  struct spiderstep_s *spiderstep = spiderstep_initialize(10, 10, 0, 95, &_spiderstep);
   unsigned char grid[100] = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
