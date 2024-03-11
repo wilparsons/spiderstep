@@ -31,17 +31,17 @@ void spiderstep_navigate(struct spiderstep_s *spiderstep) {
 
       if (spiderstep->source_y < spiderstep->destination_y) {
         spiderstep->source_step = spiderstep->grid_width;
-        spiderstep->repetition_count = spiderstep->destination_y - spiderstep->source_y;
         spiderstep->source_y_step = 1;
+        spiderstep->repetition_count = spiderstep->destination_y - spiderstep->source_y;
       } else {
         if (spiderstep->source_y > spiderstep->destination_y) {
           spiderstep->source_step = -(spiderstep->grid_width);
-          spiderstep->repetition_count = spiderstep->source_y - spiderstep->destination_y;
           spiderstep->source_y_step = -1;
+          spiderstep->repetition_count = spiderstep->source_y - spiderstep->destination_y;
         } else {
           spiderstep->source_step = 0;
-          spiderstep->repetition_count = 0;
           spiderstep->source_y_step = 0;
+          spiderstep->repetition_count = 0;
         }
       }
     } else {
@@ -50,12 +50,12 @@ void spiderstep_navigate(struct spiderstep_s *spiderstep) {
 
         if (spiderstep->source_x < spiderstep->destination_x) {
           spiderstep->source_step = 1;
-          spiderstep->repetition_count = spiderstep->destination_x - spiderstep->source_x;
           spiderstep->source_x_step = 1;
+          spiderstep->repetition_count = spiderstep->destination_x - spiderstep->source_x;
         } else {
           spiderstep->source_step = -1;
-          spiderstep->repetition_count = spiderstep->source_x - spiderstep->destination_x;
           spiderstep->source_x_step = -1;
+          spiderstep->repetition_count = spiderstep->source_x - spiderstep->destination_x;
         }
       } else {
         if (spiderstep->source_x < spiderstep->destination_x) {
@@ -64,20 +64,18 @@ void spiderstep_navigate(struct spiderstep_s *spiderstep) {
 
           if (spiderstep->source_y < spiderstep->destination_y) {
             spiderstep->source_step = spiderstep->grid_width + 1;
+            spiderstep->source_y_step = 1;
 
             if ((spiderstep->destination_y - spiderstep->source_y) < spiderstep->repetition_count) {
               spiderstep->repetition_count = spiderstep->destination_y - spiderstep->source_y;
             }
-
-            spiderstep->source_y_step = 1;
           } else {
             spiderstep->source_step = -(spiderstep->grid_width) + 1;
+            spiderstep->source_y_step = -1;
 
             if ((spiderstep->source_y - spiderstep->destination_y) < spiderstep->repetition_count) {
               spiderstep->repetition_count = spiderstep->source_y - spiderstep->destination_y;
             }
-
-            spiderstep->source_y_step = -1;
           }
         } else {
           spiderstep->repetition_count = spiderstep->source_x - spiderstep->destination_x;
@@ -85,20 +83,18 @@ void spiderstep_navigate(struct spiderstep_s *spiderstep) {
 
           if (spiderstep->source_y < spiderstep->destination_y) {
             spiderstep->source_step = spiderstep->grid_width - 1;
+            spiderstep->source_y_step = 1;
 
             if ((spiderstep->destination_y - spiderstep->source_y) < spiderstep->repetition_count) {
               spiderstep->repetition_count = spiderstep->destination_y - spiderstep->source_y;
             }
-
-            spiderstep->source_y_step = 1;
           } else {
             spiderstep->source_step = -(spiderstep->grid_width) - 1;
+            spiderstep->source_y_step = -1;
 
             if ((spiderstep->source_y - spiderstep->destination_y) < spiderstep->repetition_count) {
               spiderstep->repetition_count = spiderstep->source_y - spiderstep->destination_y;
             }
-
-            spiderstep->source_y_step = -1;
           }
         }
       }
