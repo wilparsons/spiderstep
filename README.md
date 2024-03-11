@@ -67,7 +67,7 @@ This is the initialization function that accepts the 5 following arguments.
 
 `spiderstep` is the pointer to the uninitialized `struct` instance.
 
-The return value data type is `struct spiderstep_s`.
+The return value data type is `struct spiderstep_s *`.
 
 It returns a pointer to a `struct` instance initialized with the parameter values.
 
