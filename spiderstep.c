@@ -1,15 +1,18 @@
 #include "spiderstep.h"
+#include <stdio.h>
 
 void _spiderstep_calculate(struct spiderstep_s *spiderstep) {
   if (spiderstep->has_source_coordinates == false) {
     spiderstep->source_y = spiderstep->source / spiderstep->grid_height;
-    spiderstep->source_x = spiderstep->source - (spiderstep->grid_width * spiderstep->source_y);
+    spiderstep->source_x = spiderstep->source % spiderstep->grid_width;
     spiderstep->has_source_coordinates = true;
   }
 
+  printf("%lu, %lu\n", spiderstep->source_y, spiderstep->source_x);
+
   if (spiderstep->has_destination_coordinates == false) {
     spiderstep->destination_y = spiderstep->destination / spiderstep->grid_height;
-    spiderstep->destination_x = spiderstep->destination - (spiderstep->grid_width * spiderstep->destination_y);
+    spiderstep->destination_x = spiderstep->destination % spiderstep->grid_width;
     spiderstep->has_destination_coordinates = true;
   }
 
