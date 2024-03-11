@@ -71,13 +71,6 @@ The return value data type is `struct spiderstep_s`.
 
 It returns a pointer to a `struct` instance initialized with the parameter values.
 
-#### `spiderstep_calculate()`
-This is the step calculation function that accepts the following argument.
-
-`spiderstep` is the pointer to the `struct` instance containing the grid navigation data.
-
-The return value data type is `void`.
-
 #### `spiderstep_navigate()`
 This is the step navigation function that accepts the following argument.
 
