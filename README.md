@@ -13,7 +13,7 @@ Read [this article](https://medium.com/@wilparsons/spiderstep-is-a-new-optimized
 
 int main(void) {
   struct spiderstep_s _spiderstep;
-  struct spiderstep_s *spiderstep = spiderstep_initialize(10, 10, 0, 95, &_spiderstep);
+  struct spiderstep_s *spiderstep = spiderstep_initialize(10, 10, 49, 0, &_spiderstep);
   unsigned char grid[100] = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -31,24 +31,19 @@ int main(void) {
   grid[spiderstep->source] = 1;
 
   while (spiderstep->source != spiderstep->destination) {
-    spiderstep_calculate(spiderstep);
-
-    while (spiderstep->repetitions != 0) {
-      spiderstep->source += spiderstep->step;
-      grid[spiderstep->source] = 3;
-      spiderstep->repetitions--;
-    }
+    spiderstep_navigate(spiderstep);
+    grid[spiderstep->source] = 3;
   }
 
   grid[spiderstep->destination] = 2;
 
+  i = 0;
+
   while (i != 100) {
-    printf("%u", grid[i]);
+    printf("%u ", grid[i]);
 
     if (((i + 1) % 10) == 0) {
       printf("\n");
-    } else {
-      printf(" ");
     }
 
     i++;
@@ -78,6 +73,13 @@ It returns a pointer to a `struct` instance initialized with the parameter value
 
 #### `spiderstep_calculate()`
 This is the step calculation function that accepts the following argument.
+
+`spiderstep` is the pointer to the `struct` instance containing the grid navigation data.
+
+The return value data type is `void`.
+
+#### `spiderstep_navigate()`
+This is the step navigation function that accepts the following argument.
 
 `spiderstep` is the pointer to the `struct` instance containing the grid navigation data.
 

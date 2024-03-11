@@ -1,21 +1,10 @@
 #include "spiderstep.h"
-#include <stdio.h>
 
-struct spiderstep_s *spiderstep_initialize(const unsigned long grid_width, const unsigned long grid_height, const unsigned long source, const unsigned long destination, struct spiderstep_s *spiderstep) {
-  spiderstep->grid_width = grid_width;
-  spiderstep->grid_height = grid_height;
-  spiderstep->source = source;
-  spiderstep->destination = destination;
-  spiderstep->step = 0;
-  spiderstep->has_source_coordinates = false;
-  spiderstep->has_destination_coordinates = false;
-  return spiderstep;
-}
-
-void spiderstep_calculate(struct spiderstep_s *spiderstep) {
+void _spiderstep_calculate(struct spiderstep_s *spiderstep) {
   if (spiderstep->has_source_coordinates == false) {
     spiderstep->source_y = spiderstep->source / spiderstep->grid_height;
     spiderstep->source_x = spiderstep->source - (spiderstep->grid_width * spiderstep->source_y);
+    spiderstep->has_source_coordinates = true;
   }
 
   if (spiderstep->has_destination_coordinates == false) {
@@ -25,61 +14,105 @@ void spiderstep_calculate(struct spiderstep_s *spiderstep) {
   }
 
   if (spiderstep->source_x == spiderstep->destination_x) {
+    spiderstep->source_x_step = 0;
+
     if (spiderstep->source_y < spiderstep->destination_y) {
-      spiderstep->step = spiderstep->grid_width;
-      spiderstep->repetitions = spiderstep->destination_y - spiderstep->source_y;
+      spiderstep->source_step = spiderstep->grid_width;
+      spiderstep->repetition_count = spiderstep->destination_y - spiderstep->source_y;
+      spiderstep->source_y_step = 1;
     } else {
       if (spiderstep->source_y > spiderstep->destination_y) {
-        spiderstep->step = -(spiderstep->grid_width);
-        spiderstep->repetitions = spiderstep->source_y - spiderstep->destination_y;
+        spiderstep->source_step = -(spiderstep->grid_width);
+        spiderstep->repetition_count = spiderstep->source_y - spiderstep->destination_y;
+        spiderstep->source_y_step = -1;
       } else {
-        spiderstep->step = 0;
-        spiderstep->repetitions = 0;
+        spiderstep->source_step = 0;
+        spiderstep->repetition_count = 0;
+        spiderstep->source_y_step = 0;
       }
     }
   } else {
     if (spiderstep->source_y == spiderstep->destination_y) {
+      spiderstep->source_y_step = 0;
+
       if (spiderstep->source_x < spiderstep->destination_x) {
-        spiderstep->step = 1;
-        spiderstep->repetitions = spiderstep->destination_x - spiderstep->source_x;
+        spiderstep->source_step = 1;
+        spiderstep->repetition_count = spiderstep->destination_x - spiderstep->source_x;
+        spiderstep->source_x_step = 1;
       } else {
-        spiderstep->step = -1;
-        spiderstep->repetitions = spiderstep->source_x - spiderstep->destination_x;
+        spiderstep->source_step = -1;
+        spiderstep->repetition_count = spiderstep->source_x - spiderstep->destination_x;
+        spiderstep->source_x_step = -1;
       }
     } else {
       if (spiderstep->source_x < spiderstep->destination_x) {
-        spiderstep->repetitions = spiderstep->destination_x - spiderstep->source_x;
+        spiderstep->repetition_count = spiderstep->destination_x - spiderstep->source_x;
+        spiderstep->source_x_step = 1;
 
         if (spiderstep->source_y < spiderstep->destination_y) {
-          spiderstep->step = spiderstep->grid_width + 1;
+          spiderstep->source_step = spiderstep->grid_width + 1;
 
-          if ((spiderstep->destination_y - spiderstep->source_y) < spiderstep->repetitions) {
-            spiderstep->repetitions = spiderstep->destination_y - spiderstep->source_y;
+          if ((spiderstep->destination_y - spiderstep->source_y) < spiderstep->repetition_count) {
+            spiderstep->repetition_count = spiderstep->destination_y - spiderstep->source_y;
           }
+
+          spiderstep->source_y_step = 1;
         } else {
-          spiderstep->step = -(spiderstep->grid_width) + 1;
+          spiderstep->source_step = -(spiderstep->grid_width) + 1;
 
-          if ((spiderstep->source_y - spiderstep->destination_y) < spiderstep->repetitions) {
-            spiderstep->repetitions = spiderstep->source_y - spiderstep->destination_y;
+          if ((spiderstep->source_y - spiderstep->destination_y) < spiderstep->repetition_count) {
+            spiderstep->repetition_count = spiderstep->source_y - spiderstep->destination_y;
           }
+
+          spiderstep->source_y_step = -1;
         }
       } else {
-        spiderstep->repetitions = spiderstep->source_x - spiderstep->destination_x;
+        spiderstep->repetition_count = spiderstep->source_x - spiderstep->destination_x;
+        spiderstep->source_x_step = -1;
 
         if (spiderstep->source_y < spiderstep->destination_y) {
-          spiderstep->step = spiderstep->grid_width - 1;
+          spiderstep->source_step = spiderstep->grid_width - 1;
 
-          if ((spiderstep->destination_y - spiderstep->source_y) < spiderstep->repetitions) {
-            spiderstep->repetitions = spiderstep->destination_y - spiderstep->source_y;
+          if ((spiderstep->destination_y - spiderstep->source_y) < spiderstep->repetition_count) {
+            spiderstep->repetition_count = spiderstep->destination_y - spiderstep->source_y;
           }
+
+          spiderstep->source_y_step = 1;
         } else {
-          spiderstep->step = -(spiderstep->grid_width) - 1;
+          spiderstep->source_step = -(spiderstep->grid_width) - 1;
 
-          if ((spiderstep->source_y - spiderstep->destination_y) < spiderstep->repetitions) {
-            spiderstep->repetitions = spiderstep->source_y - spiderstep->destination_y;
+          if ((spiderstep->source_y - spiderstep->destination_y) < spiderstep->repetition_count) {
+            spiderstep->repetition_count = spiderstep->source_y - spiderstep->destination_y;
           }
+
+          spiderstep->source_y_step = -1;
         }
       }
     }
+  }
+}
+
+struct spiderstep_s *spiderstep_initialize(const unsigned long grid_width, const unsigned long grid_height, const unsigned long source, const unsigned long destination, struct spiderstep_s *spiderstep) {
+  spiderstep->grid_width = grid_width;
+  spiderstep->grid_height = grid_height;
+  spiderstep->source = source;
+  spiderstep->destination = destination;
+  spiderstep->source_step = 0;
+  spiderstep->repetition_count = 0;
+  spiderstep->has_source_coordinates = false;
+  spiderstep->has_destination_coordinates = false;
+  return spiderstep;
+}
+
+void spiderstep_navigate(struct spiderstep_s *spiderstep) {
+  if (spiderstep->repetition_count == 0) {
+    _spiderstep_calculate(spiderstep);
+  }
+
+  if (spiderstep->repetition_count != 0) {
+    spiderstep->source += spiderstep->source_step;
+    spiderstep->source_x += spiderstep->source_x_step;
+    spiderstep->source_y += spiderstep->source_y_step;
+    spiderstep->repetition_count--;
   }
 }
