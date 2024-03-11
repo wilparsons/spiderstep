@@ -9,13 +9,13 @@ struct spiderstep_s {
   unsigned long source;
   unsigned long destination;
   long source_step;
-  unsigned long repetition_count;
   unsigned long source_x;
   unsigned long source_y;
   unsigned long destination_x;
   unsigned long destination_y;
   char source_x_step;
   char source_y_step;
+  unsigned long repetition_count;
   bool has_source_coordinates;
   bool has_destination_coordinates;
 };

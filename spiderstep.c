@@ -3,13 +3,13 @@
 void _spiderstep_calculate(struct spiderstep_s *spiderstep) {
   if (spiderstep->has_source_coordinates == false) {
     spiderstep->source_y = spiderstep->source / spiderstep->grid_width;
-    spiderstep->source_x = spiderstep->source - (spiderstep->source_y * spiderstep->grid_width);
+    spiderstep->source_x = spiderstep->source - (spiderstep->grid_width * spiderstep->source_y);
     spiderstep->has_source_coordinates = true;
   }
 
   if (spiderstep->has_destination_coordinates == false) {
     spiderstep->destination_y = spiderstep->destination / spiderstep->grid_width;
-    spiderstep->destination_x = spiderstep->destination - (spiderstep->destination_y * spiderstep->grid_width);
+    spiderstep->destination_x = spiderstep->destination - (spiderstep->grid_width * spiderstep->destination_y);
     spiderstep->has_destination_coordinates = true;
   }
 
