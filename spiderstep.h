@@ -4,8 +4,8 @@
 #include <stdbool.h>
 
 struct spiderstep_s {
-  unsigned long grid_height;
   unsigned long grid_width;
+  unsigned long grid_height;
   unsigned long source;
   unsigned long destination;
   long source_step;
