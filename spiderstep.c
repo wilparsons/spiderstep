@@ -35,7 +35,7 @@ void spiderstep_navigate(struct spiderstep_s *spiderstep) {
         spiderstep->repetition_count = spiderstep->destination_y - spiderstep->source_y;
       } else {
         if (spiderstep->source_y > spiderstep->destination_y) {
-          spiderstep->source_step = -(spiderstep->grid_width);
+          spiderstep->source_step = -spiderstep->grid_width;
           spiderstep->source_y_step = -1;
           spiderstep->repetition_count = spiderstep->source_y - spiderstep->destination_y;
         } else {
@@ -70,7 +70,7 @@ void spiderstep_navigate(struct spiderstep_s *spiderstep) {
               spiderstep->repetition_count = spiderstep->destination_y - spiderstep->source_y;
             }
           } else {
-            spiderstep->source_step = -(spiderstep->grid_width) + 1;
+            spiderstep->source_step = -spiderstep->grid_width + 1;
             spiderstep->source_y_step = -1;
 
             if ((spiderstep->source_y - spiderstep->destination_y) < spiderstep->repetition_count) {
@@ -89,7 +89,7 @@ void spiderstep_navigate(struct spiderstep_s *spiderstep) {
               spiderstep->repetition_count = spiderstep->destination_y - spiderstep->source_y;
             }
           } else {
-            spiderstep->source_step = -(spiderstep->grid_width) - 1;
+            spiderstep->source_step = -spiderstep->grid_width - 1;
             spiderstep->source_y_step = -1;
 
             if ((spiderstep->source_y - spiderstep->destination_y) < spiderstep->repetition_count) {
