@@ -4,54 +4,10 @@
 ## Description
 SpiderStep is a grid navigation step calculation algorithm.
 
-Read [this article](https://medium.com/@wilparsons/spiderstep-is-a-new-optimized-calculation-of-8-directional-navigation-steps-in-2-dimensional-grids-d90cf44d5b5c) for an in-depth explanation.
+Read [this article](https://medium.com/@williamstaffordparsons/spiderstep-is-a-new-optimized-calculation-of-8-directional-navigation-steps-in-2-dimensional-grids-d90cf44d5b5c) for an in-depth explanation.
 
-## Usage
-``` c
-#include <stdio.h>
-#include "spiderstep.h"
-
-int main(void) {
-  struct spiderstep_s _spiderstep;
-  struct spiderstep_s *spiderstep = spiderstep_initialize(10, 10, 0, 95, &_spiderstep);
-  unsigned char grid[100] = {
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-  };
-  unsigned char i = 0;
-
-  grid[spiderstep->source] = 1;
-
-  while (spiderstep->source != spiderstep->destination) {
-    spiderstep_navigate(spiderstep);
-    grid[spiderstep->source] = 3;
-  }
-
-  grid[spiderstep->destination] = 2;
-
-  i = 0;
-
-  while (i != 100) {
-    printf("%u ", grid[i]);
-
-    if (((i + 1) % 10) == 0) {
-      printf("\n");
-    }
-
-    i++;
-  }
-
-  return 0;
-}
-```
+## License
+SpiderStep is subject to the software licensing terms from the [LICENSE file](https://github.com/williamstaffordparsons/spiderstep/blob/master/LICENSE).
 
 ## Reference
 #### `spiderstep_initialize()`
@@ -77,3 +33,35 @@ This is the step navigation function that accepts the following argument.
 `spiderstep` is the pointer to the `struct` instance containing the grid navigation data.
 
 The return value data type is `void`.
+
+## Usage
+``` c
+#include "spiderstep.h"
+
+int main(void) {
+  struct spiderstep_s _spiderstep;
+  struct spiderstep_s *spiderstep = spiderstep_initialize(10, 10, 0, 95, &_spiderstep);
+  unsigned char grid[100] = {
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+  };
+
+  grid[spiderstep->source] = 1;
+
+  while (spiderstep->source != spiderstep->destination) {
+    spiderstep_navigate(spiderstep);
+    grid[spiderstep->source] = 3;
+  }
+
+  grid[spiderstep->destination] = 2;
+  return 0;
+}
+```
