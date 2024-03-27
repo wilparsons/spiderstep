@@ -1,5 +1,5 @@
 # SpiderStep
-![SpiderStep Logo](https://repository-images.githubusercontent.com/759209321/b8f02ec6-709b-4e63-a526-0ed93d746d2c)
+![SpiderStep Logo](https://repository-images.githubusercontent.com/759209321/6a57874b-9382-4c79-bcf1-1e0f1a265a4c)
 
 ## Description
 SpiderStep is a grid navigation step calculation algorithm.
